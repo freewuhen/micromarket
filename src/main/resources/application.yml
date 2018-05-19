@@ -1,0 +1,16 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /micromarket
+
+spring:
+  datasource:
+    data-username: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/micromarket?characterEncoding=utf8&useSSL=true
+    username: root
+    password: 123456
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
