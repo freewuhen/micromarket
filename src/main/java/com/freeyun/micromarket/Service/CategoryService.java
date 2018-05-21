@@ -13,31 +13,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Service
 public class CategoryService {
     @Autowired private CategoryResitory categoryResitory;
-    @GetMapping("/getCategoryList")
     public Page<Category> getCategoryList(Integer page)
     {
         Page<Category> categories = null;
         return categories;
     }
-    @PostMapping("/addCategory")
     public int addCategory(Category category)
     {
         int status = 1;
         return status;
     }
-    @PostMapping("/updateCategory")
     public int updateCategory(Category category)
     {
         int status = 1;
         return status;
     }
-    @PostMapping("/deleteCategory")
     public int deleteCategory(Category category)
     {
         int status = 1;
         return status;
     }
-    @GetMapping("/getCategoryByCatename")
     public Page<Category> getCategoryByCatename(String catename,Pageable pageable)
     {
         Page<Category> categories = null;

@@ -1,17 +1,23 @@
 package com.freeyun.micromarket.Domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+
+import javax.persistence.*;
 
 @Entity
 public class Commodity {//商品
     @Id @Column(length = 20) private String cid;
-    private String cname;
-    private Integer price;//价格
+    @Column(length = 40) private String cname;
+    private Integer costprice;//进价
+    private Integer sellingprice;//售价
     private Integer stock_quantity;//库存数量
     private Integer Sales_volume;//销售数量
-    private String description;//商品商品描述
+    @Lob @Basic(fetch = FetchType.LAZY) @Column(columnDefinition = "text") private String description;//商品商品描述
+    @ManyToOne(cascade = CascadeType.ALL) private  Category category;//分类
+    @ManyToOne(cascade = CascadeType.ALL) private Brands brands;//品牌
+    @ManyToOne(cascade = CascadeType.ALL) private Supplier supplier;//供应商
+
     public Commodity(){
 
     }
@@ -32,13 +38,6 @@ public class Commodity {//商品
         this.cname = cname;
     }
 
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
 
 
     public String getDescription() {
@@ -63,5 +62,37 @@ public class Commodity {//商品
 
     public void setSales_volume(Integer sales_volume) {
         Sales_volume = sales_volume;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Brands getBrands() {
+        return brands;
+    }
+
+    public void setBrands(Brands brands) {
+        this.brands = brands;
+    }
+
+    public Integer getCostprice() {
+        return costprice;
+    }
+
+    public void setCostprice(Integer costprice) {
+        this.costprice = costprice;
+    }
+
+    public Integer getSellingprice() {
+        return sellingprice;
+    }
+
+    public void setSellingprice(Integer sellingprice) {
+        this.sellingprice = sellingprice;
     }
 }

@@ -1,12 +1,13 @@
 package com.freeyun.micromarket.Domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class Admin {
-    @Id private String Aid;
-    private String password;
+    @Id @Column(length = 20) private String Aid;
+    @Column(length = 20) private String password;
     public Admin(){
 
     }

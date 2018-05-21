@@ -6,5 +6,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CategoryResitory extends JpaRepository<Category,Integer> {
-    Page<Category> findByCatename(Pageable pageable);//需要完善
+    Page<Category> findByCatename(String cname,Pageable pageable);//需要完善,模糊查询
 }

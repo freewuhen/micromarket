@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Service
 public class UserService {
     @Autowired private UserRespository userRespository;
-    @GetMapping("/signinUser")
     public int signinUser(User user)
     {
 
         return 1;// or 0
     }
-    @PostMapping("/signupUser")
     public int signupUser(User user)
     {
         return 1;// or 0

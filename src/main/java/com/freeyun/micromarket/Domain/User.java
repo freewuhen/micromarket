@@ -7,9 +7,9 @@ import javax.persistence.Id;
 @Entity
 public class User {
     @Id @Column(length = 20) private String uid;
-    private String password;
-    private String telenumber;
-    private String addr;
+    @Column(length = 20) private String password;
+    @Column(length = 11) private String telenumber;
+    @Column(length = 80) private String addr;
     private Integer balence;//余额
     public User(){
 

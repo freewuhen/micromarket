@@ -8,12 +8,12 @@ import java.util.Date;
 public class TransationRecord {
     @Id @Column(name = "user_id",length = 20) private String uid;
     @Id @Column(name = "commodity_id",length = 20) private String cid;
-    private Date transtime;//交易时间
+    @Temporal(TemporalType.TIMESTAMP) private Date transtime;//交易时间
     private Integer transstatus;//交易状态
     private Integer money;//交易金额
 
-    @ManyToOne @JoinColumn(name = "user_id",insertable = false, updatable = false) private User user;
-    @ManyToOne @JoinColumn(name = "commodity_id",insertable = false, updatable = false)private Commodity commodity;
+    @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "user_id",insertable = false, updatable = false) private User user;
+    @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "commodity_id",insertable = false, updatable = false)private Commodity commodity;
 
     public TransationRecord(){
 
