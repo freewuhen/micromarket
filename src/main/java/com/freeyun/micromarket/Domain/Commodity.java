@@ -9,11 +9,16 @@ import javax.persistence.*;
 public class Commodity {//商品
     @Id @Column(length = 20) private String cid;
     @Column(length = 40) private String cname;
-    private Integer costprice;//进价
-    private Integer sellingprice;//售价
+    private Float costprice;//进价
+    private Float sellingprice;//售价
     private Integer stock_quantity;//库存数量
-    private Integer Sales_volume;//销售数量
+    private Integer sales_volume;//销售数量
+    private Float score;//评分
     @Lob @Basic(fetch = FetchType.LAZY) @Column(columnDefinition = "text") private String description;//商品商品描述
+    private @Column(length = 100)String bimage;//大图片的地址
+    private @Column(length = 100) String simage;//小图片的地址
+
+
     @ManyToOne(cascade = CascadeType.ALL) private  Category category;//分类
     @ManyToOne(cascade = CascadeType.ALL) private Brands brands;//品牌
     @ManyToOne(cascade = CascadeType.ALL) private Supplier supplier;//供应商
@@ -56,13 +61,6 @@ public class Commodity {//商品
         this.stock_quantity = stock_quantity;
     }
 
-    public Integer getSales_volume() {
-        return Sales_volume;
-    }
-
-    public void setSales_volume(Integer sales_volume) {
-        Sales_volume = sales_volume;
-    }
 
     public Category getCategory() {
         return category;
@@ -80,19 +78,59 @@ public class Commodity {//商品
         this.brands = brands;
     }
 
-    public Integer getCostprice() {
+    public String getBimage() {
+        return bimage;
+    }
+
+    public void setBimage(String bimage) {
+        this.bimage = bimage;
+    }
+
+    public String getSimage() {
+        return simage;
+    }
+
+    public void setSimage(String simage) {
+        this.simage = simage;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
+    public Integer getSales_volume() {
+        return sales_volume;
+    }
+
+    public void setSales_volume(Integer sales_volume) {
+        this.sales_volume = sales_volume;
+    }
+
+    public Float getScore() {
+        return score;
+    }
+
+    public void setScore(Float score) {
+        this.score = score;
+    }
+
+    public Float getCostprice() {
         return costprice;
     }
 
-    public void setCostprice(Integer costprice) {
+    public void setCostprice(Float costprice) {
         this.costprice = costprice;
     }
 
-    public Integer getSellingprice() {
+    public Float getSellingprice() {
         return sellingprice;
     }
 
-    public void setSellingprice(Integer sellingprice) {
+    public void setSellingprice(Float sellingprice) {
         this.sellingprice = sellingprice;
     }
 }

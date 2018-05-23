@@ -1,4 +1,4 @@
-package com.freeyun.micromarket.Controller;
+package com.freeyun.micromarket.Controller.UserController;
 
 import org.springframework.web.bind.annotation.RestController;
 

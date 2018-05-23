@@ -12,7 +12,6 @@ public class UserService {
     @Autowired private UserRespository userRespository;
     public int signinUser(User user)
     {
-
         return 1;// or 0
     }
     public int signupUser(User user)

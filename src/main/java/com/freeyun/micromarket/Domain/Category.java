@@ -1,11 +1,10 @@
 package com.freeyun.micromarket.Domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 @Entity
 public class Category {
-    @Id @Column(length = 10)private Integer cateid;//类别号
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)  private Integer cateid;//类别号
     @Column(length = 30) private String catename;//类别名
     private Integer amount;//类别下数量
     public Category(){
