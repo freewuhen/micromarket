@@ -20,5 +20,6 @@ public class CommodityServiceTest {
 //        Integer page = 0;
 //        Page<Commodity> commodities = commodityService.getCommodityByCatename(cname,page);
 //        assertThat(commodities.getSize(),equalTo(10));
+
     }
 }

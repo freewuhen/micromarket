@@ -19,8 +19,8 @@ public class BrandsServiceTest {
         Integer page = 0;
         String bname = "帅";
         int status = 0;
-        Page<Brands> brands = brandsService.getBrandsByBname(bname,page);
-        assertThat(brands.getSize(),equalTo(10));
+//        Page<Brands> brands = brandsService.getBrandsByBname(bname,page);
+//        assertThat(brands.getSize(),equalTo(10));
 
         bname = "可口同乐";
         Brands brands1 = new Brands();
@@ -30,12 +30,5 @@ public class BrandsServiceTest {
         status = brandsService.addBrands(brands1);
         assertThat(status,equalTo(1));
 
-        status = brandsService.deleteBrands(bname);
-        assertThat(status,equalTo(1));
-        status = brandsService.deleteBrands(bname);
-        assertThat(status,equalTo(0));
-
-        status = brandsService.updateBrands(brands1);
-        assertThat(status,equalTo(0));
     }
 }

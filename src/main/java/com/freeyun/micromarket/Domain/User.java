@@ -10,7 +10,7 @@ public class User {
     @Column(length = 20) private String password;
     @Column(length = 11) private String telenumber;
     @Column(length = 80) private String addr;
-    private Integer balence;//余额
+    private Float balence;//余额
     public User(){
 
     }
@@ -47,11 +47,11 @@ public class User {
         this.addr = addr;
     }
 
-    public Integer getBalence() {
+    public Float getBalence() {
         return balence;
     }
 
-    public void setBalence(Integer balence) {
+    public void setBalence(Float balence) {
         this.balence = balence;
     }
 }

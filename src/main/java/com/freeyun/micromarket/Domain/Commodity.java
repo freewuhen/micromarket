@@ -14,6 +14,7 @@ public class Commodity {//商品
     private Integer stock_quantity;//库存数量
     private Integer sales_volume;//销售数量
     private Float score;//评分
+    private Integer nopps;//Number of people participating in the score
     @Lob @Basic(fetch = FetchType.LAZY) @Column(columnDefinition = "text") private String description;//商品商品描述
     private @Column(length = 100)String bimage;//大图片的地址
     private @Column(length = 100) String simage;//小图片的地址
@@ -132,5 +133,13 @@ public class Commodity {//商品
 
     public void setSellingprice(Float sellingprice) {
         this.sellingprice = sellingprice;
+    }
+
+    public Integer getNopps() {
+        return nopps;
+    }
+
+    public void setNopps(Integer nopps) {
+        this.nopps = nopps;
     }
 }
