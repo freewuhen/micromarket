@@ -47,6 +47,9 @@ public class BrandsService {
         Page<Brands> brands = brandsRespository.findAll(pageable);
         return brands;
     }
+    public Brands getBrandsBybid(String bid){
+        return brandsRespository.findById(bid).get();
+    }
     public int addBrands(Brands brands)
     {
         int status = 0;

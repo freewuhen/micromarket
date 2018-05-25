@@ -19,10 +19,9 @@ public class Commodity {//商品
     private @Column(length = 100)String bimage;//大图片的地址
     private @Column(length = 100) String simage;//小图片的地址
 
-
-    @ManyToOne(cascade = CascadeType.ALL) private  Category category;//分类
-    @ManyToOne(cascade = CascadeType.ALL) private Brands brands;//品牌
-    @ManyToOne(cascade = CascadeType.ALL) private Supplier supplier;//供应商
+    @ManyToOne() private  Category category;//分类
+    @ManyToOne() private Brands brands;//品牌
+    @ManyToOne( ) private Supplier supplier;//供应商
 
     public Commodity(){
 

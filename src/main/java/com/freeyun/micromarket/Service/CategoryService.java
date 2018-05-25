@@ -19,7 +19,6 @@ public class CategoryService {
     @Autowired private CommodityResitory commodityResitory;
     private Logger logger  = LoggerFactory.getLogger(CategoryService.class);
     private int size = 10; //页面大小
-
     private Boolean existbyname(String cname){
         Category testcate = null;
         testcate = categoryResitory.findByCatename(cname);
@@ -30,16 +29,8 @@ public class CategoryService {
         else
             return true;
     }
-    public Page<Category> getCategoryList(Integer page)
-    {
-        Sort sort = new Sort(Sort.Direction.ASC,"cateid");
-        Pageable pageable = PageRequest.of(page,size,sort);
-        Page<Category> categories = categoryResitory.findAll(pageable);
-        return categories;
-    }
-
     private Boolean existbyid(Integer cid) {
-       Category testcate = null;
+        Category testcate = null;
         try{
             testcate = categoryResitory.findById(cid).get();
             return true;
@@ -49,6 +40,18 @@ public class CategoryService {
             return false;
         }
 
+    }
+    public Page<Category> getCategoryList(Integer page)
+    {
+        Sort sort = new Sort(Sort.Direction.ASC,"cateid");
+        Pageable pageable = PageRequest.of(page,size,sort);
+        Page<Category> categories = categoryResitory.findAll(pageable);
+        return categories;
+    }
+
+    public Category getCateByCid(Integer cateid)
+    {
+        return categoryResitory.findById(cateid).get();
     }
     public int addCategory(Category category)
     {

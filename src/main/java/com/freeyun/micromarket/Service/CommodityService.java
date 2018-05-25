@@ -8,29 +8,106 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CommodityService {
     @Autowired private CommodityResitory commodityResitory;
+    @Autowired private TransationService transationService;
     private Integer size = 10;
+
+    public Boolean existbyname(String cname){
+        Commodity commodity = commodityResitory.findByCname(cname);
+
+        if(commodity == null)
+        {
+            return false;
+        }
+        else
+            return true;
+    }
+    public Boolean existbyid(String cid) {
+        Commodity commodity = null;
+        try{
+            commodity = commodityResitory.findById(cid).get();
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+
+    }
     public Page<Commodity> getCommodityList(Integer page)
     {
-        Page<Commodity> commodities = null;
+        Sort sort  = new Sort(Sort.Direction.ASC,"cname");
+        Pageable pageable = PageRequest.of(page,size,sort);
+        Page<Commodity> commodities  = commodityResitory.findAll(pageable);
         return commodities;
+    }
+    public Commodity getComByCid(String cid)
+    {
+        return commodityResitory.findById(cid).get();
     }
     public int addCommodity(Commodity commodity)
     {
         int status = 1;
+        String cid = commodity.getCid(),cname = commodity.getCname();
+        if (existbyid(cid))
+        {
+            status = -1;// the commodity already exists
+        }
+        else {
+            try {
+                commodityResitory.save(commodity);
+                status = 1;
+            }catch (Exception e)
+            {
+                status = 0;// error
+            }
+        }
         return status;
     }
     public int updateCommodity(Commodity commodity)
     {
         int status = 1;
+        String cid = commodity.getCid(),cname = commodity.getCname();
+        if (existbyid(cid))
+        {
+            try {
+                commodityResitory.save(commodity);
+                status = 1;
+            }catch (Exception e)
+            {
+                status = 0;// error
+            }
+        }
+        else {
+            status = -1;// the commodity doesn't  exist
+        }
         return status;
     }
-    public int deleteCommodity(Commodity commodity)
+    @Transactional
+    public int deleteCommodity(String cid)
     {
         int status = 1;
+        Commodity commodity;
+        if (existbyid(cid))
+        {
+            commodity = commodityResitory.findById(cid).get();
+            try {
+                transationService.deleteTransationRecordByCom(commodity);
+                commodityResitory.delete(commodity);
+                status = 1;
+            }catch (Exception e)
+            {
+                System.out.print("\n"+e.getLocalizedMessage()+"\n");
+                status = 0;// error
+            }
+        }
+        else {
+            status = -1;// the commodity doesn't  exist
+        }
         return status;
     }
     public Page<Commodity> getCommodityByCondition(Integer condition,Integer page,String name,Sort sort)
@@ -51,6 +128,7 @@ public class CommodityService {
         }
         return commodities;
     }
+    @Transactional
     public int addComScore(String cid,Float score)
     {
         Float comscore;
@@ -72,7 +150,8 @@ public class CommodityService {
         }
 
     }
-    public int purchaseCom(String cid)
+    @Transactional
+    public int purchaseCom(String cid)// 付款之后
     {
         Integer stock_quantity = 0,sales_volume = 0;
         Commodity commodity;

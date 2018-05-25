@@ -19,4 +19,16 @@ public class UserService {
     {
         return 1;// or 0
     }
+    public Boolean existbyid(String uid) {
+        User user = null;
+        try{
+             user= userRespository.findById(uid).get();
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+
+    }
 }

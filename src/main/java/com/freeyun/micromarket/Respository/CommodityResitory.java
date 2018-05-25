@@ -11,6 +11,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface CommodityResitory extends JpaRepository<Commodity,String> {
 
+    Commodity findByCname(String cname);
+
     @Query(value = "select * from commodity where cname like ?1"
             ,countQuery = "select count(*) from commodity where cname like ?1",nativeQuery = true)
     Page<Commodity> findByCname(String cname,Pageable pageable);//需要完善,模糊查询

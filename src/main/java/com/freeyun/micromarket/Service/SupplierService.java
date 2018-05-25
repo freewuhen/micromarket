@@ -73,6 +73,9 @@ public class SupplierService {
 
         return status;
     }
+    public Supplier getSupBysid(Integer sid){
+        return supplierRespository.findById(sid).get();
+    }
     public int deleteSupplier(Integer sid)
     {
         int status = 0;

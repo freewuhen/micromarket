@@ -5,36 +5,25 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@IdClass(TRMultikey.class)
 public class TransationRecord {
-    @Id @Column(name = "user_id",length = 20) private String uid;
-    @Id @Column(name = "commodity_id",length = 20) private String cid;
-    @Id @Temporal(TemporalType.TIMESTAMP) private Date transtime;//交易时间
+    @Id @Column(length = 20) private String tid;
+    @Temporal(TemporalType.TIMESTAMP) private Date transtime;//交易时间
     private Integer transstatus;//交易状态
     private Float money;//交易金额
     private Integer transnumber;//Number of transactions
-
-    @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "user_id",insertable = false, updatable = false) private User user;
-    @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "commodity_id",insertable = false, updatable = false)private Commodity commodity;
+    @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "user_id") private User user;
+    @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "commodity_id") private Commodity commodity;
 
     public TransationRecord(){
 
     }
 
-    public String getUid() {
-        return uid;
+    public String getTid() {
+        return tid;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public String getCid() {
-        return cid;
-    }
-
-    public void setCid(String cid) {
-        this.cid = cid;
+    public void setTid(String tid) {
+        this.tid = tid;
     }
 
     public Date getTranstime() {

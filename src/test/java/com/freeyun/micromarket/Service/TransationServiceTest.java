@@ -1,6 +1,10 @@
 package com.freeyun.micromarket.Service;
 
+import com.freeyun.micromarket.Domain.Commodity;
 import com.freeyun.micromarket.Domain.TransationRecord;
+import com.freeyun.micromarket.Domain.User;
+import com.freeyun.micromarket.Respository.CommodityResitory;
+import com.freeyun.micromarket.Respository.UserRespository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,8 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class TransationServiceTest {
     @Autowired TransationService transationService;
+    @Autowired UserRespository userRespository;
+    @Autowired CommodityResitory commodityResitory;
     @Test
     public void addTransationRecord() {
         LocalDateTime timepoint = LocalDateTime.now();
@@ -26,13 +32,21 @@ public class TransationServiceTest {
         Date date = Date.from(timepoint.atZone(ZoneId.systemDefault()).toInstant());
         System.out.print("\ndate.getHours()"+date.getHours()+"\n");
         int status = 0;
+        String tid = "20180525010101001001";
+        String cid = "010101";
+        String uid = "freeyun";
+        User user = userRespository.findById(uid).get();
+        Commodity commodity = commodityResitory.findById(cid).get();
+        System.out.print("\ncommodity.getCname()"+commodity.getCname()+"\n");
         TransationRecord transationRecord = new TransationRecord();
-        transationRecord.setCid("010101");
-        transationRecord.setUid("wuhen");
+        transationRecord.setTid(tid);
         transationRecord.setTransstatus(-1);
         transationRecord.setTranstime(date);
         transationRecord.setTransnumber(5);
         transationRecord.setMoney(Float.valueOf(20));
+        transationRecord.setUser(user);
+        transationRecord.setCommodity(commodity);
+
         status = transationService.addTransationRecord(transationRecord);
         assertThat(status,equalTo(1));
 
