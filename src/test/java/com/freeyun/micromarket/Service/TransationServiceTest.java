@@ -33,7 +33,7 @@ public class TransationServiceTest {
         System.out.print("\ndate.getHours()"+date.getHours()+"\n");
         int status = 0;
         String tid = "20180525010101001001";
-        String cid = "010101";
+        String cid = "010103";
         String uid = "freeyun";
         User user = userRespository.findById(uid).get();
         Commodity commodity = commodityResitory.findById(cid).get();
@@ -51,10 +51,10 @@ public class TransationServiceTest {
         assertThat(status,equalTo(1));
 
     }
-    @Test
-    public void findByTranstime() {
-        String transtime = "2018";
-        int page = 0;
-        transationService.getAllTrByTime(transtime,page);
-    }
+//    @Test
+//    public void findByTranstime() {
+//        String transtime = "2018";
+//        int page = 0;
+//        transationService.getAllTrByTime(transtime,page);
+//    }
 }

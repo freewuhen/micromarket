@@ -1,6 +1,7 @@
 package com.freeyun.micromarket.Controller.UserController;
 
 import com.freeyun.micromarket.Domain.Commodity;
+import com.freeyun.micromarket.Respository.CommodityResitory;
 import com.freeyun.micromarket.Service.CommodityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CommodityController {
     @Autowired private CommodityService commodityService;
+    @Autowired private CommodityResitory commodityResitory;
     private String[] conditions = {"sellingprice","sales_volume","score"};
     private Sort.Direction[] directions = {Sort.Direction.ASC,Sort.Direction.DESC};
     private Object getCommodityBy(Integer qcondition,Integer page, String catename,Integer condno,Integer dirno)
@@ -27,11 +29,15 @@ public class CommodityController {
     }
 
     @GetMapping("/getCommodityList")
-    public Page<Commodity> getCommodityList(Integer page)
+    public Object getCommodityList()
     {
-        Page<Commodity> commodities = commodityService.getCommodityList(page);
-        return commodities;
+        return commodityResitory.findAll();
     }
+//    public Page<Commodity> getCommodityList(Integer page)
+//    {
+//        Page<Commodity> commodities = commodityService.getCommodityList(page);
+//        return commodities;
+//    }
     @PostMapping("/addCommodity")
     public int addCommodity(Commodity commodity)
     {

@@ -17,7 +17,7 @@ public class BrandsServiceTest {
     @Test
     public void getBrandsByBname() {
         Integer page = 0;
-        String bname = "帅";
+        String bname;
         int status = 0;
 //        Page<Brands> brands = brandsService.getBrandsByBname(bname,page);
 //        assertThat(brands.getSize(),equalTo(10));
@@ -31,4 +31,5 @@ public class BrandsServiceTest {
         assertThat(status,equalTo(1));
 
     }
+
 }
