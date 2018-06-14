@@ -1,23 +1,23 @@
 # micromarket
 ### 微超市项目
 * #### 需求说明：
-##### 1.  所需要开发的软件系统边界
+###### 1.  所需要开发的软件系统边界
 本系统主要用于超市与顾客之间的商品的交易，因此商品的生产，监管，运输都不属于本系统功能范围之能。
-##### 2.系统所有的相关及使用人员角色
+###### 2.系统所有的相关及使用人员角色
 *  超市管理者:使用传统web页面进行管理
 * 顾客：通过微信小程序进行购物
-##### 3.系统关键的使用场景
+###### 3.系统关键的使用场景
  顾客通过微信手机端，以微信公众号为入口来使用系统来进行商品分类、查询、查看、下单、支付等功能的使用；﻿
 店面（小超市）管理者 可以通过后台进行商品管理、商品分类管理；
 * #### 总体设计：
-### 1.组成系统的模块
-  1. 后端
+###### 1.组成系统的模块
+  * 后端
        * 控制模块（controller）
        * 数据持续模块(Respository)
        * 服务模块(Service)
       * 数据模型模块(Domain)
       * 权限管理模块
-  2. 前端
+  * 前端
       * 微信小程序（顾客）
       * 传统web端（超市管理者）
 
@@ -83,6 +83,7 @@ Field  |Type | Null | Key |Default | Extra |
 
 
 
+
 * transation_record
 
 Field  |Type | Null | Key |Default | Extra |
@@ -110,8 +111,16 @@ Field  |Type | Null | Key |Default | Extra |
 | sid         | int(11)     | NO   | PRI | NULL    | auto_increment |
 | contactinfo | varchar(30) | YES  |     | NULL    |                |
 | sname       | varchar(60) | YES  |     | NULL    |                |
+* address
+Field  |Type | Null | Key |Default | Extra |
+---|---|---|---|---|--- 
+| aid      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| address  | varchar(100) | YES  |     | NULL    |                |
+| name     | varchar(14)  | YES  |     | NULL    |                |
+| tele     | varchar(11)  | YES  |     | NULL    |                |
+| user_uid | varchar(50)  | YES  | MUL | NULL    |                |
 
 * #### 概要设计：
-* #### 部署方案：
+* ###### 部署方案：
   * **Nginx 存储静态资源**
   * **Tomcat 响应HTTP请求 返回Json**
