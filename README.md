@@ -113,5 +113,5 @@ Field  |Type | Null | Key |Default | Extra |
 
 * #### 概要设计：
 * #### 部署方案：
-  ** Nginx 存储静态资源**
-  ** Tomcat 响应HTTP请求 返回Json**
+  **Nginx 存储静态资源**
+  **Tomcat 响应HTTP请求 返回Json**
