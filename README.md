@@ -111,7 +111,9 @@ Field  |Type | Null | Key |Default | Extra |
 | sid         | int(11)     | NO   | PRI | NULL    | auto_increment |
 | contactinfo | varchar(30) | YES  |     | NULL    |                |
 | sname       | varchar(60) | YES  |     | NULL    |                |
+
 * address
+
 Field  |Type | Null | Key |Default | Extra |
 ---|---|---|---|---|--- 
 | aid      | int(11)      | NO   | PRI | NULL    | auto_increment |
