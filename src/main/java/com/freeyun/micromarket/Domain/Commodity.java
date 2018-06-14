@@ -21,7 +21,7 @@ public class Commodity {//商品
 
     @ManyToOne() private  Category category;//分类
     @ManyToOne() private Brands brands;//品牌
-    @ManyToOne( ) private Supplier supplier;//供应商
+    @ManyToOne() private Supplier supplier;//供应商
 
     public Commodity(){
 

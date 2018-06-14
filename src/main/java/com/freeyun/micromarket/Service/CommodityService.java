@@ -116,6 +116,9 @@ public class CommodityService {
         Pageable pageable = PageRequest.of(page,size,sort);
         Page<Commodity> commodities = null;
         switch (condition){
+            case 0:
+                commodities = commodityResitory.findByCname(name,pageable);
+                break;
             case 1:
                 commodities = commodityResitory.findByCategory(name,pageable);
                 break;

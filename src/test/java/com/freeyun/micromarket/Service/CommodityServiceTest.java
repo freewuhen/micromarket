@@ -26,11 +26,11 @@ public class CommodityServiceTest {
         //Commodity commodity = commodityService.getComByCid("010103");
 
         Category category = categoryService.getCateByCid(1);
-        Brands brands = brandsService.getBrandsBybid("010102");
+        Brands brands = brandsService.getBrandsBybid("010103");
         Supplier supplier = supplierService.getSupBysid(1);
         Commodity commodity = new Commodity();
-        String id = "010103";
-        String name = "绿茶550ml";
+        String id = "010102";
+        String name = "500ml百事可乐";
 
 
         commodity.setSupplier(supplier);
@@ -44,16 +44,15 @@ public class CommodityServiceTest {
         commodity.setNopps(0);
         commodity.setCostprice(Float.valueOf(3));
         commodity.setSellingprice(Float.valueOf(4));
-
+        commodity.setDescription("真香");
         status = commodityService.addCommodity(commodity);
         assertThat(status,equalTo(1));
 
-        commodity.setDescription("实惠");
-        status = commodityService.updateCommodity(commodity);
-        assertThat(status,equalTo(1));
-
-        commodity = commodityService.getComByCid(id);
-        assertThat(commodity.getCname(),equalTo(name));
+//        status = commodityService.updateCommodity(commodity);
+//        assertThat(status,equalTo(1));
+//
+//        commodity = commodityService.getComByCid(id);
+//        assertThat(commodity.getCname(),equalTo(name));
 
 
 

@@ -8,7 +8,7 @@ import java.util.Date;
 public class TransationRecord {
     @Id @Column(length = 20) private String tid;
     @Temporal(TemporalType.TIMESTAMP) private Date transtime;//交易时间
-    private Integer transstatus;//交易状态
+    private Integer transstatus;//交易状态 -1,0,1
     private Float money;//交易金额
     private Integer transnumber;//Number of transactions
     @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "user_id") private User user;

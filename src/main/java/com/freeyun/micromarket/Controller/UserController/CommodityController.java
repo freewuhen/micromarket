@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author: freeyun
+ */
 @RestController
 public class CommodityController {
     @Autowired private CommodityService commodityService;
@@ -33,11 +36,6 @@ public class CommodityController {
     {
         return commodityResitory.findAll();
     }
-//    public Page<Commodity> getCommodityList(Integer page)
-//    {
-//        Page<Commodity> commodities = commodityService.getCommodityList(page);
-//        return commodities;
-//    }
     @PostMapping("/addCommodity")
     public int addCommodity(Commodity commodity)
     {
@@ -59,7 +57,14 @@ public class CommodityController {
 
     }
 
-
+    @GetMapping("/getCommodityByCid")
+    public Object getCommodityByCid(@RequestParam String cid){
+        return commodityResitory.findById(cid).get();
+    }
+    @GetMapping("/getCommodityByComname")
+    public Object getCommodityByComname(@RequestParam Integer page,@RequestParam String catename,@RequestParam Integer condno,@RequestParam Integer dirno){
+        return getCommodityBy(0,page,catename,condno,dirno);
+    }
     @GetMapping("/getCommodityByCatename")
     public Object getCommodityByCatename(@RequestParam Integer page,@RequestParam String catename,@RequestParam Integer condno,@RequestParam Integer dirno){
         return getCommodityBy(1,page,catename,condno,dirno);

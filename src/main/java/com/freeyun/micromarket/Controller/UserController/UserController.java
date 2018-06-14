@@ -28,16 +28,18 @@ public class UserController {
     @PostMapping ("/signinUser")
     public User signinUser(@RequestParam String code) throws IOException
     {
-        RestTemplate restTemplate = new RestTemplate();
-        String params = "appid=" + wxspAppid + "&secret=" + wxspSecret + "&js_code=" +code;
-        String url = "https://api.weixin.qq.com/sns/jscode2session?"+params;
+        RestTemplate restTemplate = new RestTemplate();// 发送request请求
+        String params = "appid=" + wxspAppid + "&secret=" + wxspSecret + "&js_code=" +code;//参数
+        String url = "https://api.weixin.qq.com/sns/jscode2session?"+params;// 微信接口 用于查询oponid
         String response = restTemplate.getForObject(url,String.class);
         logger.info("response:"+response);
-        WeixinRespense weixinRespense = objectMapper.readValue(response,WeixinRespense.class);
-        String session_key = weixinRespense.getSession_key();//h+BXgRf9lWEa6G/xKrZLDA==
-        openid= weixinRespense.getOpenid();//ovjQr5EE9KlbYlHXW6p7gJZqdoKM
+        WeixinRespense weixinRespense = objectMapper.readValue(response,WeixinRespense.class); // 逆序列化 ，将字符串中的有效信息取出
+        String session_key = weixinRespense.getSession_key();//如果解密encryptData获取unionId，会用的到
+        openid= weixinRespense.getOpenid();//微信小程序 用户唯一标识
         logger.info("session_key:"+session_key);
         logger.info("openid:"+openid);
+
+        // 注册用户，将查询到的oponid作为id
         User user = new User();
         user.setUid(openid);
         user.setBalence(Float.valueOf(0));
@@ -64,7 +66,7 @@ public class UserController {
 //            logger.error(e.getLocalizedMessage());
 //        }
     }
-    @GetMapping("getUser")
+    @GetMapping("/getUser")
     public User getUser()
     {
         if (userService.existbyid(openid))

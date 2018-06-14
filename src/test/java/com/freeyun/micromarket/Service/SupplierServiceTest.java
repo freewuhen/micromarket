@@ -16,7 +16,7 @@ public class SupplierServiceTest {
     @Test
     public void getSupplierBySname() {
         Supplier supplier = new Supplier();
-        String sname = "青岛可口可乐公司";
+        String sname = "旺旺食品";
         String cinfo = "17865682502";
         int status = 0;
         supplier.setSname(sname);
