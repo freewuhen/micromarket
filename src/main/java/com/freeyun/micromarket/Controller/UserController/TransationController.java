@@ -1,11 +1,13 @@
 package com.freeyun.micromarket.Controller.UserController;
 
 import com.freeyun.micromarket.Domain.Commodity;
+import com.freeyun.micromarket.Domain.TRTicket;
 import com.freeyun.micromarket.Domain.TransationRecord;
 import com.freeyun.micromarket.Domain.User;
 import com.freeyun.micromarket.Respository.CommodityResitory;
 import com.freeyun.micromarket.Respository.UserRespository;
 import com.freeyun.micromarket.Service.CommodityService;
+import com.freeyun.micromarket.Service.TRTicketService;
 import com.freeyun.micromarket.Service.TransationService;
 import com.freeyun.micromarket.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +21,33 @@ import java.util.Date;
 
 @RestController
 public class TransationController {
-    @Autowired TransationService transationService;
-    @Autowired UserService userService;
-    @Autowired CommodityService commodityService;
-    @Autowired UserRespository userRespository;
-    @Autowired CommodityResitory commodityResitory;
+    @Autowired private TransationService transationService;
+    @Autowired private UserService userService;
+    @Autowired private CommodityService commodityService;
+    @Autowired private UserRespository userRespository;
+    @Autowired private CommodityResitory commodityResitory;
+    @Autowired private TRTicketService trTicketService;
+
 
     @PostMapping("addTransationRecord")
-    public int addTransationRecord(@RequestParam String tid,@RequestParam String uid,@RequestParam String cid,@RequestParam Float money,@RequestParam Integer num,@RequestParam Integer status,@RequestParam long time)
+    public int addTransationRecord(@RequestParam String tid,@RequestParam String uid,@RequestParam String cid,@RequestParam Float money,@RequestParam Integer num,@RequestParam Integer status,@RequestParam long time,@RequestParam String trid)
     {
         TransationRecord transationRecord = new TransationRecord();
-        User user = userRespository.findById(uid).get();
-        Commodity commodity = commodityResitory.findById(cid).get();
+        User user = null;
+        Commodity commodity = null;
+        TRTicket ticket =null;
+
+        try{
+            user = userRespository.findById(uid).get();
+            commodity = commodityResitory.findById(cid).get();
+            ticket = trTicketService.getTicketByid(trid);
+        }
+        catch (Exception e)
+        {
+            return -2;
+        }
+
+
         transationRecord.setTid(tid);
         transationRecord.setTransstatus(status);
         transationRecord.setTransnumber(num);
@@ -38,6 +55,7 @@ public class TransationController {
         transationRecord.setUser(user);
         transationRecord.setCommodity(commodity);
         transationRecord.setTranstime(new Date(time));
+        transationRecord.setTrTicket(ticket);
         return transationService.addTransationRecord(transationRecord);
     }
     @GetMapping("/getTransationRecordByUid")
@@ -81,6 +99,18 @@ public class TransationController {
 
     }
 
+    @GetMapping("getTrByTicket")
+    public Object getTrByTicket(@RequestParam String trid,@RequestParam Integer page){
+        if(trTicketService.existByid(trid) == false)
+        {
+            return -1;
+        }
+        else{
+            TRTicket ticket = trTicketService.getTicketByid(trid);
+            return transationService.getTrByTrticket(ticket,page);
+        }
+
+    }
     @PostMapping("/pay")
     public int pay(@RequestParam String tid){
         TransationRecord transationRecord;

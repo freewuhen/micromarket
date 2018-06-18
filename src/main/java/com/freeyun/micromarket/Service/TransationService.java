@@ -1,6 +1,7 @@
 package com.freeyun.micromarket.Service;
 
 import com.freeyun.micromarket.Domain.Commodity;
+import com.freeyun.micromarket.Domain.TRTicket;
 import com.freeyun.micromarket.Domain.TransationRecord;
 import com.freeyun.micromarket.Domain.User;
 import com.freeyun.micromarket.Respository.CommodityResitory;
@@ -217,7 +218,12 @@ public class TransationService {
         Page<TransationRecord> transationRecords = transationRecordRespository.findByTransstatus(transstatus,pageable);
         return transationRecords;
     }
-
+    public Page<TransationRecord> getTrByTrticket(TRTicket trTicket, Integer page)
+    {
+        Pageable pageable = PageRequest.of(page,size,sort);
+        Page<TransationRecord> transationRecords = transationRecordRespository.findByTrTicket(trTicket,pageable);
+        return transationRecords;
+    }
     @Transactional
     public int pay(String tid)
     {

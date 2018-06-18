@@ -1,8 +1,8 @@
 package com.freeyun.micromarket.Service;
 
-import com.freeyun.micromarket.Domain.Address;
+import com.freeyun.micromarket.Domain.TRTicket;
 import com.freeyun.micromarket.Domain.User;
-import com.freeyun.micromarket.Respository.AddressRespository;
+import com.freeyun.micromarket.Respository.TRTicketRespository;
 import com.freeyun.micromarket.Respository.UserRespository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,15 +12,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AddressService {
-    @Autowired  private AddressRespository addressRespository;
+public class TRTicketService {
+    @Autowired
+    private TRTicketRespository trTicketRespository;
     @Autowired  private UserRespository userRespository;
-    private Logger logger  = LoggerFactory.getLogger(AddressService.class);
-    private Boolean existAdsressByid(Integer aid)
+    private Logger logger  = LoggerFactory.getLogger(TRTicketService.class);
+    public Boolean existByid(String trid)
     {
-        Address address = null;
+        TRTicket ticket = null;
         try {
-            address = addressRespository.findById(aid).get();
+            ticket = trTicketRespository.findById(trid).get();
             return true;
         }catch (Exception e)
         {
@@ -28,22 +29,22 @@ public class AddressService {
             return false;
         }
     }
-    public Address getAdByid(Integer aid)
+    public TRTicket getTicketByid(String trid)
     {
-        if (existAdsressByid(aid))
+        if (existByid(trid))
         {
-            return addressRespository.findById(aid).get();
+            return trTicketRespository.findById(trid).get();
         }
         else {
             return null;
         }
     }
-    public int addAddress(Address address)
+    public int addTRTicket(TRTicket ticket)
     {
-        if (existAdsressByid(address.getAid()) == false)
+        if (existByid(ticket.getTrid()) == false)
         {
             try{
-                addressRespository.save(address);
+                trTicketRespository.save(ticket);
                 return 1;
             }catch (Exception e)
             {
@@ -57,15 +58,15 @@ public class AddressService {
         }
 
     }
-    public int deleteAddress(Integer aid)
+    public int deleteTRTicket(String trid)
     {
-        if (existAdsressByid(aid) == false)
+        if (existByid(trid) == false)
         {
             return -1;
         }
         else {
             try {
-                addressRespository.deleteById(aid);
+                trTicketRespository.deleteById(trid);
                 return 1;
             }catch (Exception e)
             {
@@ -77,15 +78,15 @@ public class AddressService {
         }
 
     }
-    public int updateAddress(Address address)
+    public int updateTRTicket(TRTicket ticket)
     {
-        if (existAdsressByid(address.getAid()) == false)
+        if (existByid(ticket.getTrid()) == false)
         {
             return -1;
         }
         else {
             try {
-                addressRespository.save(address);
+               trTicketRespository.save(ticket);
                 return 1;
             }catch (Exception e)
             {
@@ -97,8 +98,8 @@ public class AddressService {
         }
 
     }
-    public List<Address> findAddressByUser(User user)
+    public List<TRTicket> findTRTicketByUser(User user)
     {
-        return addressRespository.findDistinctByUser(user);
+        return trTicketRespository.findDistinctByUser(user);
     }
 }

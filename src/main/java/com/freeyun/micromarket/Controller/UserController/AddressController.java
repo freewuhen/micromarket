@@ -21,6 +21,13 @@ public class AddressController {
         User user = userService.getUserById(uid);
         return addressService.findAddressByUser(user);
     }
+
+    @GetMapping("/findAddressByAid")
+    public
+    Object findAddressByAid(@RequestParam Integer aid)
+    {
+      return  addressService.getAdByid(aid);
+    }
     @PostMapping ("/addAddress")
     public int findAddressByUser(@RequestParam String address ,@RequestParam String name,@RequestParam String tele,@RequestParam String uid)
     {
@@ -33,10 +40,11 @@ public class AddressController {
         return addressService.addAddress(ad);
     }
     @PostMapping ("/updateAddress")
-    public int updateAddressByUser(@RequestParam String address ,@RequestParam String name,@RequestParam String tele,@RequestParam String uid)
+    public int updateAddressByUser(@RequestParam Integer aid,@RequestParam String address ,@RequestParam String name,@RequestParam String tele,@RequestParam String uid)
     {
         User user = userService.getUserById(uid);
         Address ad = new Address();
+        ad.setAid(aid);
         ad.setAddress(address);
         ad.setName(name);
         ad.setTele(tele);

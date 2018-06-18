@@ -6,13 +6,14 @@ import java.util.Date;
 
 @Entity
 public class TransationRecord {
-    @Id @Column(length = 20) private String tid;
+    @Id @Column(length = 30) private String tid;
     @Temporal(TemporalType.TIMESTAMP) private Date transtime;//交易时间
     private Integer transstatus;//交易状态 -1,0,1
     private Float money;//交易金额
     private Integer transnumber;//Number of transactions
     @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "user_id") private User user;
     @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "commodity_id") private Commodity commodity;
+    @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "ticket_id") private TRTicket trTicket;
 
     public TransationRecord(){
 
@@ -74,5 +75,11 @@ public class TransationRecord {
         this.transnumber = transnumber;
     }
 
+    public TRTicket getTrTicket() {
+        return trTicket;
+    }
 
+    public void setTrTicket(TRTicket trTicket) {
+        this.trTicket = trTicket;
+    }
 }
